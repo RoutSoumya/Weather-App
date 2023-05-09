@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"/>
+    <style>
+      body {
+        background-image: url("rain2.jpg");
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="border-radius:0.7em;">
+      <div class="container-fluid">
+        <a class="navbar-brand"
+          spellcheck="false"
+          class="text12"
+          contenteditable="false"
+          style="font-size: xx-large; color: blue">Weather App</a>
+        <div class="form-check form-switch" onclick="toggle()">
+          <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+        </div>
+        <button class="navbar-toggler" type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: x-large">
+                This Application is created by
+              </a>
+              <ul class="dropdown-menu" style="font-size: large">
+                <li><a class="dropdown-item" href="#"><b>Soumya Kanta Rout</b></a></li>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            <button class="btn btn-outline-success" type="submitBtn" id="submitBtn">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <h1 class="my-4 text-center">Weather for <span id="cityName"></span></h1>
+    <div class="container">
+      <main>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Temperatures</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  <span id="temp2"></span><small class="text-muted fw-light"><sup>&#8451;</sup></small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Temperature is <span id="temp"></span></li>
+                  <li>Min Temperature is <span id="min_temp"></span></li>
+                  <li>Max Temperature is <span id="max_temp"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Humidity Info</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  <span id="humidity2"></span
+                  ><small class="text-muted fw-light"> %</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Wind Degrees is <span id="wind_degrees"></span></li>
+                  <li>Feels Like <span id="feels_like"></span></li>
+                  <li>Cloud PCT is <span id="cloud_pct"></span></li>
+                  <li>Humidity is <span id="humidity"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Day Info</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  <span id="wind_speed2"></span>
+                  <small class="text-muted fw-light"> km/hr</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Wind Speed is <span id="wind_speed"></span></li>
+                  <li>Sunrise time is <span id="sunrise"></span></li>
+                  <li>Sunset time is <span id="sunset"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="display-6 text-center mb-4"><u>Weather of some other common places</u></h2>
+        <div class="table-responsive">
+          <table class="table text-center" style="color: white">
+            <thead>
+              <tr>
+                <th style="width: 12%"></th>
+                <th>Temp (in &#8451;)</th>
+                <th>Wind Speed (in m/s)</th>
+                <th>Wind Degrees</th>
+                <th>Cloud PCT</th>
+                <th>Feels Like</th>
+                <th>Humidity (in %)</th>
+                <th>Max Temp (in &#8451;)</th>
+                <th>Min Temp (in &#8451;)</th>
+                <th>Sunrise</th>
+                <th>Sunset</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-start">Tokyo</th>
+                <td><span id="tok_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_wind_speed"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_wind_degrees"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_cloud_pct"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_feels_like"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_humidity"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_max_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_min_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_sunrise"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="tok_sunset"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">London</th>
+                <td><span id="lon_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_wind_speed"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_wind_degrees"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_cloud_pct"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_feels_like"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_humidity"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_max_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_min_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_sunrise"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="lon_sunset"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-start">Bangalore</th>
+                <td><span id="ban_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_wind_speed"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_wind_degrees"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_cloud_pct"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_feels_like"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_humidity"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_max_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_min_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_sunrise"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="ban_sunset"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td></tr>
+              <tr>
+                <th scope="row" class="text-start">Paris</th>
+                <td><span id="par_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_wind_speed"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_wind_degrees"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_cloud_pct"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_feels_like"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_humidity"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_max_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_min_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_sunrise"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="par_sunset"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td></tr>
+              <tr>
+                <th scope="row" class="text-start">Egypt</th>
+                <td><span id="egy_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_wind_speed"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_wind_degrees"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_cloud_pct"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_feels_like"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_humidity"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_max_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_min_temp"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_sunrise"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                <td><span id="egy_sunset"></span><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <br />
+  </body>
+</html>
